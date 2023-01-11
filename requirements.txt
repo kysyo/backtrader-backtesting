@@ -1,0 +1,7 @@
+backtrader
+ccxt
+matplotlib==3.2.2
+numpy
+pandas
+influxdb
+tabulate

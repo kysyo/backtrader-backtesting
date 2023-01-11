@@ -1,0 +1,18 @@
+from config.influxdb_config import influxdb_client
+
+class InfluxdbData:
+    def __init__(self, measurement_name, start, end):
+        self.influxdb_client = influxdb_client
+        self.measurement_name = measurement_name
+        self.start = start
+        self.end = end
+
+    def get_influxdb_data(self):
+        sql = "SELECT * " \
+              "FROM {0} " \
+              "WHERE TIME >= '{1}' AND TIME <= '{2}'" \
+            .format(self.measurement_name, self.start, self.end)
+
+        df = self.influxdb_client.query(sql)
+        result_df = df[self.measurement_name]
+        return result_df
