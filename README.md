@@ -3,7 +3,7 @@ An example of a trading strategy tester using Backtrader
 
 ## Installation
 
-Activating [Virtualenv](https://virtualenv.pypa.io/en/latest/)
+
 ```
 make init
 source venv/bin/activate
