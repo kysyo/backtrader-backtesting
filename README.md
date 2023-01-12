@@ -3,16 +3,24 @@ An example of a trading strategy tester using Backtrader
 
 ## Installation
 
+1. repository clone 
+```
+git clone https://github.com/kysyo/backtrader-backtesting
+```
 
+2. install Python library
 ```
-make init
-source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-Installing dependencies
+3. run backtesting
 ```
-make install
+python backtrader_main.py
 ```
+
+## Settings
+
+
 
 ## Results
 
