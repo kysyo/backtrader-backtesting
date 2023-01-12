@@ -52,64 +52,6 @@ class LazyBear(bt.Strategy):
         self.is_volatility = bt.And(self.no_sqz == False, self.sqz_on == False)  # true 변동성이 큼, false 변동성이작음
         self.is_long_cond = self.val > 0                                         # true면 long, false면 short
 
-    def log(self, txt, dt=None):
-        ''' Logging function for this strategy'''
-        dt = (self.datas[0].datetime.datetime(0) + timedelta(hours=9))
-        print('%s, %s' % (dt, txt))
-
-    def notify_order(self, order):
-
-        now = (self.datas[0].datetime.datetime(0) + timedelta(hours=9))
-
-        if order.status == order.Cancelled:  # status 5
-            print('{} 주문 취소... {:.2f} {}'.format(now, order.executed.price, 'long' if order.isbuy() else 'short'))
-            return
-
-        if order.status in [order.Submitted]:  # status 1
-            # Buy/Sell order submitted/accepted to/by broker - Nothing to do
-            print('{} Order Submitted... '.format(now))
-            return
-
-        if order.status in [order.Accepted]:  # status 2
-            # Buy/Sell order submitted/accepted to/by broker - Nothing to do
-            print('{} Order Accepted...'.format(now))
-            return
-
-        if not order.status == order.Completed:
-            print('{} Order is not completed...'.format(now))
-            return  # discard any other notification
-
-        if not self.position:  # we left the market
-            print('{} we left the marke.. CLOSE@price: {:.2f}'.format(now, order.executed.price))
-            return
-
-        if order.status in [order.Margin, order.Rejected]:
-            print('{} Order Margin/Rejected'.format(now))
-            return
-
-        if order.status in [order.Expired]:
-            print('{} Order EXPIRED'.format(now))
-
-        if order.status in [order.Completed]:
-            self.log(
-                f"{order.data._name:<6} {('BUY' if order.isbuy() else 'SELL'):<5} "
-                f"Price: {order.executed.price:6.2f} "
-                f"Cost: {order.executed.value:6.2f} "
-                f"Comm: {order.executed.comm:4.2f} "
-                f"Size: {order.created.size:9.4f} "
-            )
-
-    def notify_trade(self, trade):
-        """Provides notification of closed trades."""
-        if trade.isclosed:
-            self.log(
-                "{} Trade Closed: 손익 {}, 누적손익 {},".format(
-                    trade.data._name,
-                    round(trade.pnl, 2),
-                    round(trade.pnlcomm, 1),
-                )
-            )
-
     def next(self):
 
         if not self.is_volatility[-1] and self.is_volatility:

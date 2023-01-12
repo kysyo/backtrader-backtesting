@@ -49,9 +49,7 @@ def main():
 
         # 초기 투자금
         init_cash = cerebro.broker.getvalue()
-
         locale.setlocale(locale.LC_ALL, 'ko_KR')  # 숫자 3자리마다 콤마 찍게 설정 1000000 -> 1,000,000
-        print('* 스타트 금액 : %s $' % locale.format_string('%d', init_cash, grouping=True))
 
         # analyzers 설정
         cerebro.addanalyzer(util.Analyzer, _name='Analyzer')                # 사용자 정의 analyzer
@@ -77,8 +75,9 @@ def main():
 
         # 최종 금액 / 수익률 출력
         final_cash = cerebro.broker.getvalue()
-        print('* 최종 금액 : %s $' % locale.format_string('%d', final_cash, grouping=True))
-        print("수익률 : ", float(final_cash - init_cash) / float(init_cash) *100.0, "%")
+        print('* 초기 투자금 : %s $' % locale.format_string('%d', init_cash, grouping=True))
+        print('* 백테스트 후 투자금 : %s $' % locale.format_string('%d', final_cash, grouping=True))
+        print("수익률 : ", round(float(final_cash - init_cash) / float(init_cash) * 100.0, 2), "%")
 
         # 백테스팅 결과 csv 파일 생성
         if common_confing["save_result_csv"]:
