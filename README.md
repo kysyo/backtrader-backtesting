@@ -1,5 +1,6 @@
 # Backtrader Backtesting
-An example of a trading strategy tester using Backtrader
+파이썬 라이브러리인 Backtrader를 이용한 비트코인 백테스트 툴 입니다.
+백테스트에 사용할 데이터는 CCXT에서 시세를 조회하여 사용하며 사용하거나 (default) 설정에 따라 csv파일을 이용하거나 influxDB를 사용할 수도 있습니다.
 
 ## Installation
 
@@ -20,7 +21,33 @@ python backtrader_main.py
 
 ## Settings
 
+```
+common_confing
+ccxt_config 는 
+influxdb_config는 influxDB를 사용할 경우에만 접속정보를 환경변수에 등록 후 사용하면 됩니다.
+```
 
+### common_confing
+
+| Input       | Description |
+| ----------- | ----------- |  
+|data_type|백테스트 데이터를 어디서 가져올 것인지 선택 1: ccxt에서 바로 조회 2: csv 파일사용 3: influxDB 데이터 (int)|  
+|save_result_csv|백테스팅 결과 csv파일로 생성할것인지 여부. True=생성/False=미생성 (boolean)|  
+|start_time|백테스트 시작시간 (ccxt와 influxDB데이터에서 사용) (string)|  
+|end_time|백테스트 종료시간 (ccxt와 influxDB데이터에서 사용) (string)|  
+|time_type|ccxt에서 조회할 시간 타입 1d, 1w, 4h... (string)|  
+|cash|백테스트 초기 자금 설정 (int)|
+|commission|백테스트 수수료 설정 (float)|
+
+### ccxt_config
+| Input       | Description |
+| ----------- | ----------- | 
+|ccxt_rate_limit_time|ccxt api 조회제한 회피용 대기 시간 (float)|
+|symbol| CCXT에서 조회할 심볼 (string)|
+|ccxt_limit_cnt|ccxt api 최대 조회제한 갯수 (default 1000개) (int)|
+
+### 전략추가
+stra
 
 ## Results
 
