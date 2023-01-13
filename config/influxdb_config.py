@@ -7,6 +7,8 @@ influxdb_user_name = os.environ.get('INFLUXDB_USER_NAME', None)
 influxdb_database_name = os.environ.get('INFLUXDB_DATABASE_NAME', None)
 influxdb_password = os.environ.get('INFLUXDB_PASSWORD', None)
 
+measurement_name = ""  # influxDB에서 데이터를 받아올 measurement명
+
 # influxDB 연결 설정
 influxdb_client = DataFrameClient(host=influxdb_host,
                                   port=8086,

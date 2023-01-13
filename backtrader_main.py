@@ -5,6 +5,7 @@ import pandas as pd
 from tabulate import tabulate
 from config.common_config import common_confing
 import strategy as strategy_list
+from strategy import SmaCross, RsiDivergence, LazyBear
 from util.sizer import CustomSizer
 from data.ccxt_data import CcxtData
 from data.influxdb_data import InfluxdbData
@@ -15,7 +16,7 @@ def main():
     try:
         cerebro = bt.Cerebro()
         data_type = common_confing["data_type"]         # 백테스트 데이터 타입 선택 1: CCXT에서 바로 조회 2: csv 파일사용 3: influxDB 데이터
-        strategy = strategy_list.SmaCross               # 백테스트 할 전략
+        strategy = SmaCross                             # 백테스트 할 전략 등록
 
         # default : 저장된 데이터 쓰지않고 CCXT에서 바로 시세 조회
         if data_type == 2:
@@ -25,8 +26,7 @@ def main():
             df.index = pd.to_datetime(df.index, format="%Y-%m-%d %H:%M:%S")
         elif data_type == 3:
             # influxDB에 저장된 데이터 사용
-            df = InfluxdbData(measurement_name=common_confing["measurement_name"],
-                              start=common_confing["start_time"],
+            df = InfluxdbData(start=common_confing["start_time"],
                               end=common_confing["end_time"]).get_influxdb_data()
         else:
             # ccxt에서 바로 조회
