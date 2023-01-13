@@ -40,7 +40,7 @@ influxdb_config는 influxDB를 사용할 경우에만 접속정보를 환경변�
 |save_result_csv|boolean|백테스팅 결과를 csv파일로 생성할것인지 여부. True: 생성 False: 미생성 |  
 |start_time|string|백테스트 시작시간 (ccxt와 influxDB데이터에서 사용) |  
 |end_time|string|백테스트 종료시간 (ccxt와 influxDB데이터에서 사용) |  
-|time_type|string|ccxt에서 조회할 시간 타입 1d, 1w, 4h... |  
+|time_type|string|ccxt에서 조회할 시간 타입 (1d, 1w, 4h...) |  
 |cash|int|백테스트 초기 자금 설정 |
 |commission|float|백테스트 수수료 설정 |
 
@@ -48,7 +48,7 @@ influxdb_config는 influxDB를 사용할 경우에만 접속정보를 환경변�
 | Input       |Type  | Description |
 | ----------- |----- | ----------- | 
 |ccxt_rate_limit_time|float|ccxt api 조회제한 회피용 대기 시간 |
-|symbol|string| CCXT에서 조회할 심볼 |
+|symbol|string| CCXT에서 조회할 심볼 (BTC/USDT, ETH/USDT ... ) |
 |ccxt_limit_cnt|int|ccxt api 최대 조회제한 갯수 (default 1000개) |
 
 ### Strategy setup
