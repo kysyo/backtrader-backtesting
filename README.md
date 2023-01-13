@@ -1,9 +1,11 @@
 # Backtrader Backtesting
 파이썬 라이브러리인 Backtrader를 이용한 비트코인 백테스트 툴 입니다.
 
-백테스트에 사용할 데이터는 CCXT를 통해 binance 거래소의 시세를 조회하여 사용합니다 (default)
+CCXT를 통해 binance 거래소의 시세데이터를 받아 백테스팅을 실행합니다 (default settings)
 
 설정에 따라 데이터가 저장된 csv파일을 이용하거나 influxDB를 사용할 수도 있습니다.
+
+Backtrader 라이브러리를 통해 새로운 전략을 추가하거나 기존 전략을 변경할 수 있습니다.
 
 ## Installation
 
