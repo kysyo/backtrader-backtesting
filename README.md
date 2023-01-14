@@ -27,8 +27,8 @@ python backtrader_main.py
 ## Settings
 
 ```
-common_confing : 백테스트와  필요한 설정. 백테스트 데이터와 시간,  등을 설정 
-ccxt_config : 코인 시세조회, 거래등을 담당하는 ccxt 라이브러리에 관한 설정.
+backtest_confing : 백테스트에 필요한 설정.
+ccxt_config : 코인 시세조회를 위한 ccxt 라이브러리에 관한 설정.
 influxdb_config : influxDB에 대한 접속정보와 measurements정보. 접속정보를 os 환경변수에 등록 후 사용할 수 있습니다.
 ```
 
