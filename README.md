@@ -27,12 +27,12 @@ python backtrader_main.py
 ## Settings
 
 ```
-common_confing
-ccxt_config 는 CCXT에서 조회할 심볼
-influxdb_config는 influxDB를 사용할 경우에만 접속정보를 환경변수에 등록 후 사용하면 됩니다.
+common_confing : 백테스트와  필요한 설정. 백테스트 데이터와 시간,  등을 설정 
+ccxt_config : 코인 시세조회, 거래등을 담당하는 ccxt 라이브러리에 관한 설정.
+influxdb_config : influxDB에 대한 접속정보와 measurements정보. 접속정보를 os 환경변수에 등록 후 사용할 수 있습니다.
 ```
 
-### common_confing
+### backtest_confing
 
 | Input       |Type  | Description |
 | ----------- |----- | ----------- |  
@@ -40,7 +40,6 @@ influxdb_config는 influxDB를 사용할 경우에만 접속정보를 환경변�
 |save_result_csv|boolean|백테스팅 결과를 csv파일로 생성할것인지 여부. True: 생성 False: 미생성 |  
 |start_time|string|백테스트 시작시간 (ccxt와 influxDB데이터에서 사용) |  
 |end_time|string|백테스트 종료시간 (ccxt와 influxDB데이터에서 사용) |  
-|time_type|string|ccxt에서 조회할 시간 타입 (1d, 1w, 4h...) |  
 |cash|int|백테스트 초기 자금 설정 |
 |commission|float|백테스트 수수료 설정 |
 
@@ -48,12 +47,13 @@ influxdb_config는 influxDB를 사용할 경우에만 접속정보를 환경변�
 | Input       |Type  | Description |
 | ----------- |----- | ----------- | 
 |ccxt_rate_limit_time|float|ccxt api 조회제한 회피용 대기 시간 |
+|time_type|string|ccxt에서 조회할 시간 타입 (1d, 1w, 4h...) |  
 |symbol|string| CCXT에서 조회할 심볼 (BTC/USDT, ETH/USDT ... ) |
 |ccxt_limit_cnt|int|ccxt api 최대 조회제한 갯수 (default 1000개) |
 
 ### Strategy setup
 ```
-backtrader_main.py의 strategy = 에 사용할 전략을 등록하면 됩니다.
+backtrader_main.py의 strategy 변수에 사용할 전략을 등록하면 됩니다.
 ```
 
 ## Results
