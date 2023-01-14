@@ -9,7 +9,7 @@ from config.common_config import ccxt_config
 
 class CcxtData:
 
-    def __init__(self, request_start_time, request_time_type="1d", request_end_time=None):
+    def __init__(self, request_start_time, request_end_time=None):
         '''
         ccxt 라이브러리를 사용해 바이낸스 코인 시세를 받아오는 메소드
         요청한 시작시간, 종료시간의 차이를 시간타입별로 계산하고
@@ -30,7 +30,7 @@ class CcxtData:
         self.exchange = ccxt.binance()
         self.exchange_rate_limit_time = float(ccxt_config["ccxt_rate_limit_time"])  # ccxt api 조회제한 회피용 대기 시간
         self.symbol = ccxt_config["symbol"]  # 조회할 심볼명
-        self.request_time_type = request_time_type  # 시간타입 (1d, 15m, 1w, 4h..)
+        self.request_time_type = ccxt_config["time_type"]  # 시간타입 (1d, 15m, 1w, 4h..)
         self.ccxt_limit_cnt = ccxt_config["ccxt_limit_cnt"]  # ccxt api 최대 조회제한 갯수 (default 1000개)
 
         # 수집 시작일과 종료일 datetime 형식으로 변환

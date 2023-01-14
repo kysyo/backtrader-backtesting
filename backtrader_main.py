@@ -3,7 +3,7 @@ import locale
 import pandas
 import pandas as pd
 from tabulate import tabulate
-from config.common_config import common_confing
+from config.common_config import backtest_confing
 import strategy as strategy_list
 from strategy import SmaCross, RsiDivergence, LazyBear
 from util.sizer import CustomSizer
@@ -15,7 +15,7 @@ def main():
 
     try:
         cerebro = bt.Cerebro()
-        data_type = common_confing["data_type"]         # 백테스트 데이터 타입 선택 1: CCXT에서 바로 조회 2: csv 파일사용 3: influxDB 데이터
+        data_type = backtest_confing["data_type"]         # 백테스트 데이터 타입 선택 1: CCXT에서 바로 조회 2: csv 파일사용 3: influxDB 데이터
         strategy = SmaCross                             # 백테스트 할 전략 등록
 
         # default : 저장된 데이터 쓰지않고 CCXT에서 바로 시세 조회
@@ -26,15 +26,14 @@ def main():
             df.index = pd.to_datetime(df.index, format="%Y-%m-%d %H:%M:%S")
         elif data_type == 3:
             # influxDB에 저장된 데이터 사용
-            df = InfluxdbData(start=common_confing["start_time"],
-                              end=common_confing["end_time"]).get_influxdb_data()
+            df = InfluxdbData(start=backtest_confing["start_time"],
+                              end=backtest_confing["end_time"]).get_influxdb_data()
         else:
             # ccxt에서 바로 조회
             # 시간형식 : yyyy-MM-dd HH:mm:ss
             # 시간타입 : 1d, 4h, 15m 등
-            df = CcxtData(request_start_time=common_confing["start_time"],
-                          request_end_time=common_confing["end_time"],
-                          request_time_type=common_confing["time_type"]).get_ccxt_data()
+            df = CcxtData(request_start_time=backtest_confing["start_time"],
+                          request_end_time=backtest_confing["end_time"]).get_ccxt_data()
 
         # 데이터 추가
         data = bt.feeds.PandasData(dataname=df)
@@ -44,8 +43,8 @@ def main():
         cerebro.addstrategy(strategy)
 
         # 초기자금 & 수수료
-        cerebro.broker.setcash(common_confing["cash"])
-        cerebro.broker.setcommission(commission=common_confing["commission"])
+        cerebro.broker.setcash(backtest_confing["cash"])
+        cerebro.broker.setcommission(commission=backtest_confing["commission"])
 
         # 초기 투자금
         init_cash = cerebro.broker.getvalue()
@@ -80,7 +79,7 @@ def main():
         print("수익률 : ", round(float(final_cash - init_cash) / float(init_cash) * 100.0, 2), "%")
 
         # 백테스팅 결과 csv 파일 생성
-        if common_confing["save_result_csv"]:
+        if backtest_confing["save_result_csv"]:
             df = pd.DataFrame(Analyzer.Analyzer.get_analysis())
             util.save_csv_file(df=df)
 
