@@ -48,7 +48,7 @@ influxdb_config : influxDB에 대한 접속정보와 measurements정보. 접속�
 | ----------- |----- | ----------- | 
 |ccxt_rate_limit_time|float|ccxt api 조회제한 회피용 대기 시간 |
 |time_type|string|ccxt에서 조회할 시간 타입 (1d, 1w, 4h...) |  
-|symbol|string| CCXT에서 조회할 심볼 (BTC/USDT, ETH/USDT ... ) |
+|symbol|string| ccxt에서 조회할 심볼 (BTC/USDT, ETH/USDT ... ) |
 |ccxt_limit_cnt|int|ccxt api 최대 조회제한 갯수 (default 1000개) |
 
 ### Strategy setup
