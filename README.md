@@ -32,6 +32,10 @@ ccxt_config : 코인 시세조회를 위한 ccxt 라이브러리에 관한 설�
 influxdb_config : influxDB에 대한 접속정보와 measurements정보. 접속정보를 os 환경변수에 등록 후 사용할 수 있습니다.
 ```
 
+start_time, end_time 을 변경하여 원하는 기간만 백테스트 하거나
+
+symbol을 변경하여 ETH/USDT, XRP/USDT 등 다양한 암호화폐를 백테스트 할 수 있습니다.
+
 ### backtest_confing
 
 | Input       |Type  | Description |
